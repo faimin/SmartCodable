@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import Foundation
-
 
 public struct SmartHexColorTransformer: ValueTransformable {
     
