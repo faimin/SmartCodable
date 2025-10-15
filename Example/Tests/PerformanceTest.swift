@@ -56,6 +56,25 @@ class PerformanceTest: XCTestCase {
             XCTAssertEqual(objects.count, count)
         }
     }
+    
+    
+    func testDesignatedPathPerformance() {
+        struct Family: SmartCodable {
+            var name: String?
+            var id: String?
+            var height: Int?
+        }
+        
+        let jsonArrayString: String? = "{\"result\":{\"data\":[{\"name\":\"Bob\",\"id\":\"1\",\"height\":180},{\"name\":\"Lily\",\"id\":\"2\",\"height\":150},{\"name\":\"Lucy\",\"id\":\"3\",\"height\":160}]}}"
+
+        let data = jsonArrayString?.data(using: .utf8)
+
+        measure {
+            let models = [Family].deserialize(from: data, designatedPath: "result.data")
+            print(models ?? "+++++++")
+        }
+    }
+    
 }
 
 
