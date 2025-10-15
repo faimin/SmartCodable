@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Foundation
 import SmartCodable
 
 /** 全局的Key映射关系
