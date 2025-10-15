@@ -48,24 +48,25 @@ struct JSONExtractor {
     }
     
     private static func getInnerObject(inside object: Any?, by designatedPath: String?) -> Any? {
+        guard let designatedPath = designatedPath, !designatedPath.isEmpty else {
+            return object
+        }
+        
+        let paths = designatedPath.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).components(separatedBy: ".")
+        guard !paths.isEmpty else {
+            return object
+        }
         
         var result: Any? = object
-        var abort = false
-        if let paths = designatedPath?.components(separatedBy: "."), paths.count > 0 {
-            var next = object as? [String: Any]
-            paths.forEach({ (seg) in
-                if seg.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) == "" || abort {
-                    return
-                }
-                if let _next = next?[seg] {
-                    result = _next
-                    next = _next as? [String: Any]
-                } else {
-                    abort = true
-                }
-            })
+        var next = object as? [String: Any]
+        for seg in paths {
+            guard let _next = next?[seg] else {
+                return nil
+            }
+            result = _next
+            next = _next as? [String: Any]
         }
-        return abort ? nil : result
+        return result
     }
 }
 
