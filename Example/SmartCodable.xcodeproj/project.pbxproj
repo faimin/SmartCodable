@@ -144,6 +144,7 @@
 		AF374D4C62AA92DE0D9ED2B7 /* Pods_SmartCodable_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB62463C4F6AEFEAA2A5E1E /* Pods_SmartCodable_Tests.framework */; };
 		DA0F36412E9BA4A10049EB49 /* MultilineStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F36402E9BA4A10049EB49 /* MultilineStringTest.swift */; };
 		DA0F36432E9FF9890049EB49 /* DesignatedPathTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F36422E9FF9890049EB49 /* DesignatedPathTest.swift */; };
+		DAB859B02EF455BB007CA120 /* ModelUpdaterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB859AF2EF455AD007CA120 /* ModelUpdaterTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -296,6 +297,7 @@
 		BC656B63C9031B22DEB5C8EB /* Pods-SmartCodable_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.debug.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DA0F36402E9BA4A10049EB49 /* MultilineStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineStringTest.swift; sourceTree = "<group>"; };
 		DA0F36422E9FF9890049EB49 /* DesignatedPathTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignatedPathTest.swift; sourceTree = "<group>"; };
+		DAB859AF2EF455AD007CA120 /* ModelUpdaterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUpdaterTest.swift; sourceTree = "<group>"; };
 		DB7246035010143E03C7616B /* Pods-SmartCodable_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Tests/Pods-SmartCodable_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		EBE2539D7D4ED401A0AF07CA /* Pods_SmartCodable_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartCodable_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F415A4253833C1D4B5A35964 /* SmartCodable.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SmartCodable.podspec; path = ../SmartCodable.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -389,6 +391,7 @@
 				99AE7D892B3EC02E00B474E5 /* Resource */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 				DA0F36422E9FF9890049EB49 /* DesignatedPathTest.swift */,
+				DAB859AF2EF455AD007CA120 /* ModelUpdaterTest.swift */,
 				DA0F36402E9BA4A10049EB49 /* MultilineStringTest.swift */,
 				99D17BB82B9F0CF9008ADAAB /* PerformanceTest.swift */,
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
@@ -852,12 +855,10 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = RA2G5HURUT;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = RA2G5HURUT;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -1136,6 +1137,7 @@
 			files = (
 				DA0F36432E9FF9890049EB49 /* DesignatedPathTest.swift in Sources */,
 				998424C12DACA5830036C753 /* Tests_Base.swift in Sources */,
+				DAB859B02EF455BB007CA120 /* ModelUpdaterTest.swift in Sources */,
 				99D17BBA2B9F0CF9008ADAAB /* PerformanceTest.swift in Sources */,
 				99328D972B5138170074036A /* AreaTest.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
@@ -1277,7 +1279,7 @@
 			baseConfigurationReference = BC656B63C9031B22DEB5C8EB /* Pods-SmartCodable_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = RA2G5HURUT;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SmartCodable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1294,7 +1296,7 @@
 			baseConfigurationReference = AD8215B5E8E50F277C1C4356 /* Pods-SmartCodable_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = RA2G5HURUT;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SmartCodable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1310,7 +1312,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB7246035010143E03C7616B /* Pods-SmartCodable_Tests.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = RA2G5HURUT;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1334,7 +1336,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = RA2G5HURUT;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
