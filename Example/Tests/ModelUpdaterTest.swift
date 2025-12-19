@@ -24,15 +24,10 @@ class ModelUpdaterTest: NSObject {
         super.init()
         
         $model
-            .dropFirst()
+            .filter { $0 != nil }
+            .removeDuplicates(by: { $0?.age == $1?.age })
             .sink { m in
-                print("model 1 change = \((m, default: 999))")
-            }
-            .store(in: &disposeBag)
-        
-        self.publisher(for: \.model)
-            .sink { m in
-                print("model 2 change = \((m, default: 999))")
+                print(">>>>> model 1 change = \(m?.age ?? -1)")
             }
             .store(in: &disposeBag)
     }
@@ -48,13 +43,13 @@ class ModelUpdaterTest: NSObject {
         ]
         
         model = Model.deserialize(from: dic1)
-
-        guard var model else {
-            return
-        }
+        let p1 = withUnsafePointer(to: &(model!)) { $0 }
         
-        SmartUpdater.update(&model, from: dic2)
+        SmartUpdater.update(&(model!), from: dic2)
+        let p2 = withUnsafePointer(to: &(model!)) { $0 }
         
-        #expect(model.age == 200)
+        print(">>>>>> p1 = \(p1), p2 = \(p2)")
+        
+        #expect(model?.age == 200)
     }
 }
