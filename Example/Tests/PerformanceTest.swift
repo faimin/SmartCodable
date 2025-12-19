@@ -59,7 +59,7 @@ class PerformanceTest: XCTestCase {
     
     
     func testDesignatedPathPerformance() {
-        struct Family: SmartCodable {
+        struct Family: SmartCodableX {
             var name: String?
             var id: String?
             var height: Int?

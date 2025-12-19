@@ -66,7 +66,7 @@ class Tests: XCTestCase {
 
 
 // SmartCodable
-struct Smart: SmartCodable {
+struct Smart: SmartCodableX {
     var name: String?
     var age: Int?
     var sex: Sex?
@@ -78,7 +78,7 @@ struct Smart: SmartCodable {
 }
 
 
-class BaseModel: SmartCodable {
+class BaseModel: SmartCodableX {
     
     var name: String = ""
     

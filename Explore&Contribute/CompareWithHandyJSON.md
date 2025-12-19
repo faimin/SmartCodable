@@ -91,7 +91,7 @@ import SmartCodable
 * class类型的Model
 
 ```
-class SmartModel: SmartCodable {
+class SmartModel: SmartCodableX {
     var name: String = ""
     required init() { }
 }
@@ -100,7 +100,7 @@ class SmartModel: SmartCodable {
 * struct类型的Model
 
 ```
-struct SmartModel: SmartCodable {
+struct SmartModel: SmartCodableX {
     var name: String = ""
 }
 ```
@@ -198,7 +198,7 @@ struct HandyModel: HandyJSON {
 #### SmartCodable
 
 ```
-struct SmartModel: SmartCodable {
+struct SmartModel: SmartCodableX {
     var name: String = ""
     func didFinishMapping() {       
     }
@@ -250,7 +250,7 @@ struct HandyModel: HandyJSON {
 通过`func mapping()` 自定义映射关系。
 
 ```
-struct SmartModel: SmartCodable {
+struct SmartModel: SmartCodableX {
     var name: String = ""
     var age: Int?
     var ignoreKey: String = "忽略的key"
@@ -300,7 +300,7 @@ print(handyModel.dict)
 需要借助 **SmartAny** 类型解析，并且在使用解析数据的时候，需要调用 `peel` 解包。
 
 ```
-struct SmartModel: SmartCodable {
+struct SmartModel: SmartCodableX {
     @SmartAny
     var name: Any?
     
@@ -377,7 +377,7 @@ enum SmartSex: String, SmartCaseDefaultable {
     case women
 }
 
-struct SmartModel: SmartCodable {
+struct SmartModel: SmartCodableX {
     var sex: SmartSex = .man
 }
 ```

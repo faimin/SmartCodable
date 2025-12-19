@@ -5,7 +5,7 @@
 ```
 import SmartCodable
 
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = ""
 }
 
@@ -20,7 +20,7 @@ guard let model = Model.deserialize(from: dict) else { return }
 ```
 import SmartCodable
 
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = ""
 }
 
@@ -68,7 +68,7 @@ let jsonString = """
     }
 """
 
-struct PathModel: SmartCodable {
+struct PathModel: SmartCodableX {
     var name: String?
     var age: Int?
 }
@@ -87,11 +87,11 @@ Notice that all the properties of a class/struct need to deserialized should be 
 注意，类/结构体中所有需要反序列化的属性都应该符合 `SmartCodable`。
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = "Mccc"
     var sub: SubModel?
 }
-struct SubModel: SmartCodable {
+struct SubModel: SmartCodableX {
     var name: String = ""
 }
 ```
@@ -109,7 +109,7 @@ Codable does not decode the Any type, meaning that the attribute type of the mod
 Codable是无法解码Any类型的，意味着模型的属性类型不可以是 **Any**，**[Any]** 和 **[String: Any]** 类型。**SmartCodable** 提供了 **SmartAny** 来解决改它。
 
 ```
-struct AnyModel: SmartCodable {
+struct AnyModel: SmartCodableX {
     @SmartAny
     var name: Any?
     
@@ -138,12 +138,12 @@ guard let model = AnyModel.deserialize(from: dict) else { return }
 
 ```
 // ❌ 错误的示范
-struct Model<T: SmartCodable>: SmartCodable {
+struct Model<T: SmartCodable>: SmartCodableX {
     @SmartAny
     var data: T?
 }
 
-struct SubModel: SmartCodable {
+struct SubModel: SmartCodableX {
     var name: String?
 }
 ```
@@ -166,11 +166,11 @@ let dict: [String: Any] = [
 guard let model = Model.deserialize(from: dict) else { return }
 print(model)
 
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var hobby: Hobby?
 }
 
-struct Hobby: SmartCodable {
+struct Hobby: SmartCodableX {
     var name: String = ""
 }
 ```
@@ -186,7 +186,7 @@ let dict = [
     "color": "7DA5E3"
 ]
 
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var color: SmartColor?
 }
 
@@ -205,7 +205,7 @@ Make the enumeration follow **SmartCaseDefaultable**.
 让枚举遵循 **SmartCaseDefaultable**。
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var enum: MyEnum?
 }
 
@@ -228,7 +228,7 @@ enum Sex: SmartAssociatedEnumerable {
     case women
     case other(String)
 }
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var sex: Sex = .man
     static func mappingForValue() -> [SmartValueTransformer]? {
         [
@@ -266,7 +266,7 @@ let dict = [
     "number3": "Mccc"
 ]
 
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var number1: Int?
     var number2: Int?
     var number3: Int = 1
@@ -297,7 +297,7 @@ When the type conversion fails, the initialization value of the currently parsed
 ### 1. Ignore key parsing（忽略key的解析）
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = ""
     var ignore: String = ""
     var age: Int = 0
@@ -314,7 +314,7 @@ If you don't want **ignore** to participate in parsing, delete it in **CodingKey
 如果你不希望 **ignore** 参与解析，就在 **CodingKeys** 中删除它，留下的就是参与解析的。但有了 `SmartCodable` ，你就可以使用 `@IgnoredKey` .
 
 ```
-struct Home: SmartCodable {
+struct Home: SmartCodableX {
     var name: String = ""
     @IgnoredKey
     var age: [Any] = ["1"]
@@ -354,7 +354,7 @@ If you only need to change the mapping rules of a Model Key, you can override `m
 如果你只需要修改某个Model的Key的映射规则，可以重写 `mappingForKey` , 按照要求完成映射关系。
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = ""
     var age: Int = 0
 
@@ -383,7 +383,7 @@ let dict = [
 ```
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var age: Int = 0
     var name: String = ""
     static func mappingForKey() -> [SmartKeyTransformer]? {
@@ -445,7 +445,7 @@ If you want to control the scope of influence, you can override `mappingForValue
 如果你想控制影响范围，可以重写 `mappingForValue`，给每个属性设置不同的解析策略。
 
 ```
-struct SmartModel: SmartCodable {
+struct SmartModel: SmartCodableX {
     var date1: Date?
     var date2: Date?
     var url: URL?
@@ -535,11 +535,11 @@ if let model = SubModel.deserialize(from: jsonString) {
     smartPrint(value: model.c)
 }
 
-struct SuperModel: SmartCodable {
+struct SuperModel: SmartCodableX {
     var longitude: Double?
     var latitude: Double?
 }
-struct SubModel: SmartCodable {
+struct SubModel: SmartCodableX {
     var a: String?
     var b: Int?
     
@@ -551,7 +551,7 @@ struct SubModel: SmartCodable {
 2. 重写`init(from decoder: Decoder) `  方法，接管解析。
 
    ```
-   class BaseModel: SmartCodable {
+   class BaseModel: SmartCodableX {
        var name: String = ""
        var age: Int = 0
        
@@ -584,7 +584,7 @@ struct SubModel: SmartCodable {
 ### Update Existing Model（更新现有模型）
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = ""
     var age: Int = 0
 }

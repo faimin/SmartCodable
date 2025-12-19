@@ -33,7 +33,7 @@ print(model.name) // 小明
 ## SmartCodable 的继承
 
 ```
-class BaseModel: SmartCodable {
+class BaseModel: SmartCodableX {
     var name: String = ""
     required init() { }
 }
@@ -176,7 +176,7 @@ class BaseModel : Decodable & Encodable {
 - 子类仍需手动实现新增属性的编解码逻辑，代码量较多
 
 ```
-class BaseModel: SmartCodable {
+class BaseModel: SmartCodableX {
     var name: String = ""
     required init() { }
 }
@@ -241,14 +241,14 @@ class SubModel: BaseModel, SmartCodable {
 
 - 缺失子类间的公共类型
 ```
-class BaseModel: SmartCodable {
+class BaseModel: SmartCodableX {
     required init() {}
     
     var name: String = ""
     var sex: Int = 0
 }
 
-class SubModel: SmartCodable {
+class SubModel: SmartCodableX {
     required init() {}
     
     var age: Int = 0
@@ -286,7 +286,7 @@ protocol ManBaseModelProtocol {
     var manBase: BaseModel { set get }
 }
 
-class BaseModel: SmartCodable {
+class BaseModel: SmartCodableX {
     required init() {}
     
     var name: String = ""

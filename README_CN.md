@@ -121,7 +121,7 @@ dependencies: [
 ```
 import SmartCodable
 
-struct User: SmartCodable {
+struct User: SmartCodableX {
     var name: String = ""
     var age: Int = 0
 }
@@ -139,7 +139,7 @@ let user = User.deserialize(from: ["name": "John", "age": 30])
 遵循 `SmartCodable` 协议，类需要实现空初始化器：
 
 ```
-class BasicTypes: SmartCodable {
+class BasicTypes: SmartCodableX {
     var int: Int = 2
     var doubleOptional: Double?
     required init() {}
@@ -150,7 +150,7 @@ let model = BasicTypes.deserialize(from: json)
 对于结构体，编译器会提供默认的空初始化器：
 
 ```
-struct BasicTypes: SmartCodable {
+struct BasicTypes: SmartCodableX {
     var int: Int = 2
     var doubleOptional: Double?
 }
@@ -223,7 +223,7 @@ let options: Set<SmartDecodingOption> = [
 #### 2.2 解码成功后调用的后处理回调
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = ""
     mutating func didFinishMapping() {
         name = "我是 \(name)"
@@ -236,7 +236,7 @@ struct Model: SmartCodable {
 定义解码时的键映射转换，优先使用第一个有效映射：
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = ""
     var age: Int?
     
@@ -262,7 +262,7 @@ struct Model: SmartCodable {
 | **SmartURLTransformer**  | String   | URL      | 字符串转URL，可选编码和添加前缀                |
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     
     ...
     
@@ -335,7 +335,7 @@ static func mappingForValue() -> [SmartValueTransformer]? {
 Codable不支持Any解析，但可以通过@SmartAny实现：
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     @SmartAny var dict: [String: Any] = [:]
     @SmartAny var arr: [Any] = []
     @SmartAny var any: Any?
@@ -356,7 +356,7 @@ print(model)
 如果需要忽略属性解析，可以重写`CodingKeys`或使用`@IgnoredKey`：
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     @IgnoredKey
     var name: String = ""
 }
@@ -377,7 +377,7 @@ print(model)
 **将结构体属性的解码/编码“扁平化处理”**，即：**在解析当前对象时，自动将其自身字段合并赋值给被包装的子对象**。
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = ""
     var age: Int = 0
   
@@ -385,7 +385,7 @@ struct Model: SmartCodable {
     var model: FlatModel?
    
 }
-struct FlatModel: SmartCodable {
+struct FlatModel: SmartCodableX {
     var name: String = ""
     var age: Int = 0
 }
@@ -405,7 +405,7 @@ print(model)
 #### 3.4 @SmartHexColor
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     @SmartHexColor
     var color: UIColor?
 }
@@ -429,7 +429,7 @@ class PublishedModel: ObservableObject, SmartCodable {
     var name: ABC?
 }
 
-struct ABC: SmartCodable {
+struct ABC: SmartCodableX {
     var a: String = ""
 }
 
@@ -456,7 +456,7 @@ if let model = PublishedModel.deserialize(from: dict) {
 #### 4.1 基础使用
 
 ```
-class BaseModel: SmartCodable {
+class BaseModel: SmartCodableX {
     var name: String = ""
     required init() { }
 }
@@ -472,7 +472,7 @@ class StudentModel: BaseModel {
 #### 4.2 父类实现协议方法
 
 ```
-class BaseModel: SmartCodable {
+class BaseModel: SmartCodableX {
     var name: String = ""
     required init() { }
     
@@ -494,7 +494,7 @@ class StudentModel: BaseModel {
 直接实现即可，不需要 `override` 修饰。
 
 ```
-class BaseModel: SmartCodable {
+class BaseModel: SmartCodableX {
     var name: String = ""
     required init() { }
     
@@ -525,7 +525,7 @@ class StudentModel: BaseModel {
 * 子类的类协议方法需要获取父类的实现。
 
 ```
-class BaseModel: SmartCodable {
+class BaseModel: SmartCodableX {
     var name: String = ""
     required init() { }
     
@@ -561,7 +561,7 @@ class StudentModel: BaseModel {
 要使枚举可转换，必须遵循`SmartCaseDefaultable`协议：
 
 ```
-struct Student: SmartCodable {
+struct Student: SmartCodableX {
     var name: String = ""
     var sex: Sex = .man
 
@@ -576,7 +576,7 @@ let model = Student.deserialize(from: json)
 要支持 **关联值枚举解码** 使枚举遵循**SmartAssociatedEnumerable**，重写**mappingForValue**方法接管解码过程：
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var sex: Sex = .man
     static func mappingForValue() -> [SmartValueTransformer]? {
         [
@@ -617,12 +617,12 @@ SmartCodable在解码时自动处理字符串化的JSON值，无缝转换为嵌�
 - **类型推断**：根据属性类型确定解析策略(对象/数组)
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var hobby: Hobby?
     var hobbys: [Hobby]?
 }
 
-struct Hobby: SmartCodable {
+struct Hobby: SmartCodableX {
     var name: String = ""
 }
 
@@ -645,7 +645,7 @@ let dict = [
     "number3": "Mccc"
 ]
 
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var number1: Int?
     var number2: Int?
     var number3: Int = 1
@@ -670,7 +670,7 @@ struct Model: SmartCodable {
 可适应任何数据结构，包括嵌套数组结构：
 
 ```
-struct Model: SmartCodable {
+struct Model: SmartCodableX {
     var name: String = ""
     var age: Int = 0
 }

@@ -256,7 +256,7 @@ Codable 是通过 隐式实现的 CodingKeys 实现的解析映射，如果想�
 ## 使用 @IgnoredKey 忽略
 
 ```
-struct Home: SmartCodable {
+struct Home: SmartCodableX {
     var name: String = ""
 
     @IgnoredKey

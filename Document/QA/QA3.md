@@ -113,7 +113,7 @@ struct Transformer {
 有一个使用者提出，是否可以像HandyJSON一样，当解析失败直接使用初始化值填充。 例如：
 
 ```
-struct NameModel: SmartCodable {
+struct NameModel: SmartCodableX {
     var name: String = "我是初始值"
 }
 
